@@ -5,7 +5,7 @@ import requests
 app = FastAPI()
 
 # Cambia esta URL por la de tu API local o la que esté accesible desde GCP
-API_LOCAL_URL = "http://TU_IP_LOCAL:8000/asistencias"
+API_LOCAL_URL = "http://186.78.138.140:30000/asistencias"
 
 @app.get("/asistencias")
 def get_asistencias(
