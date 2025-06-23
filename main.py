@@ -13,7 +13,6 @@ def get_asistencias(
     fecha_inicio: str = Query(None),
     fecha_fin: str = Query(None)
 ):
-    # Prepara los parámetros para reenviar a la API local
     params = {}
     if empresa:
         params["empresa"] = empresa
@@ -22,7 +21,14 @@ def get_asistencias(
     if fecha_fin:
         params["fecha_fin"] = fecha_fin
 
-    # Llama a la API local
-    response = requests.get(API_LOCAL_URL, params=params)
-    data = response.json()
+    try:
+        response = requests.get(API_LOCAL_URL, params=params, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+    except requests.RequestException as e:
+        # Esto te dará más información en la respuesta de Cloud Run
+        raise HTTPException(status_code=502, detail=f"Error al conectar con la API original: {str(e)}")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error inesperado: {str(e)}")
+
     return JSONResponse(content=data)
