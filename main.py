@@ -10,7 +10,7 @@ app = FastAPI()
 
 # Configuración
 API_LOCAL_URL = "http://186.78.138.140:30000/asistencias"
-PROJECT_ID = "Pruebas"  # Cambia por tu proyecto
+PROJECT_ID = "pruebas-463316"  # Cambia por tu proyecto
 DATASET_ID = "Pruebas_assistencia"  # Cambia por tu dataset
 TABLE_ID = "asistencias_table"  # Cambia por tu tabla
 
